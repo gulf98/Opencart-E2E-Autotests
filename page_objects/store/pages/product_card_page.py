@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
@@ -15,6 +16,7 @@ class ProductCardPage(BasePage):
     def __init__(self, driver: WebDriver):
         super().__init__(driver)
 
+    @allure.step
     def check_for_visible_elements(self):
         self.visible_element(self._LOCATOR_THUMBNAIL)
         self.visible_elements(self._LOCATOR_TABS_LOCATOR)

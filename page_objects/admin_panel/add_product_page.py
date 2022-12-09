@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from page_objects.base_page_object import BasePageObject
@@ -14,26 +15,32 @@ class AddProductPage(BasePageObject):
     def __init__(self, driver):
         super().__init__(driver)
 
+    @allure.step
     def fill_in_name(self, value):
         self.input(self._LOCATOR_NAME_LOCATOR, value)
         return self
 
+    @allure.step
     def fill_in_meta_tag_title(self, value):
         self.input(self._LOCATOR_META_TAG_TITLE, value)
         return self
 
+    @allure.step
     def fill_in_model(self, value):
         self.input(self._LOCATOR_MODEL, value)
         return self
 
+    @allure.step
     def fill_in_price(self, value):
         self.input(self._LOCATOR_PRICE, value)
         return self
 
+    @allure.step
     def click_to_data_tab(self):
         self.click(self._LOCATOR_DATA_TAB)
         return self
 
+    @allure.step
     def click_to_save(self):
         self.click(self._LOCATOR_SAVE_BUTTON_)
         from page_objects.admin_panel.products_page import ProductsPage

@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from page_objects.admin_panel.products_page import ProductsPage
@@ -11,6 +12,7 @@ class ProductRows(BasePageObject):
     def __init__(self, driver):
         super().__init__(driver)
 
+    @allure.step
     def select_by_index(self, index: int) -> ProductsPage:
         self.visible_elements(self._LOCATOR_PRODUCT_ROWS)[index] \
             .find_element(*self._LOCATOR_PRODUCT_ROW_CHECKBOX) \

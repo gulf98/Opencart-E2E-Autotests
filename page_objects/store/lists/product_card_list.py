@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from page_objects.base_page_object import BasePageObject
@@ -12,17 +13,20 @@ class ProductCardList(BasePageObject):
     def __init__(self, driver):
         super().__init__(driver)
 
+    @allure.step
     def open_product_card_page_by_index(self, index: int) -> ProductCardPage:
         self.visible_elements(self._LOCATOR_PRODUCT_CARD_LIST)[index] \
             .find_element(*self._LOCATOR_NAMED_LINK_TO_PRODUCT_PAGE) \
             .click()
         return ProductCardPage(self.driver)
 
+    @allure.step
     def get_product_name_by_index(self, index: int) -> str:
         return self.visible_elements(self._LOCATOR_PRODUCT_CARD_LIST)[index] \
             .find_element(*self._LOCATOR_NAMED_LINK_TO_PRODUCT_PAGE) \
             .get_attribute("text")
 
+    @allure.step
     def get_product_price_by_index(self, index: int) -> str:
         return self.visible_elements(self._LOCATOR_PRODUCT_CARD_LIST)[index] \
             .find_element(*self._LOCATOR_PRODUCT_CARD_PRICE_) \

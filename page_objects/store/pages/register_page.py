@@ -1,3 +1,4 @@
+import allure
 from mimesis import Person
 from selenium.webdriver.common.by import By
 
@@ -18,6 +19,7 @@ class RegisterPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    @allure.step
     def check_for_visible_elements(self):
         self.visible_element(self._LOCATOR_FIRSTNAME)
         self.visible_element(self._LOCATOR_LASTNAME)
@@ -28,34 +30,42 @@ class RegisterPage(BasePage):
         self.visible_element(self._LOCATOR_AGREE_PRIVACY_POLICY)
         self.visible_element(self._LOCATOR_CONTINUE_BUTTON)
 
+    @allure.step
     def fill_in_firstname(self, value: str):
         self.input(self._LOCATOR_FIRSTNAME, value)
         return self
 
+    @allure.step
     def fill_in_lastname(self, value: str):
         self.input(self._LOCATOR_LASTNAME, value)
         return self
 
+    @allure.step
     def fill_in_email(self, value: str):
         self.input(self._LOCATOR_EMAIL, value)
         return self
 
+    @allure.step
     def fill_in_telephone(self, value: str):
         self.input(self._LOCATOR_TELEPHONE, value)
         return self
 
+    @allure.step
     def fill_in_password(self, value: str):
         self.input(self._LOCATOR_PASSWORD, value)
         return self
 
+    @allure.step
     def fill_in_password_confirm(self, value: str):
         self.input(self._LOCATOR_PASSWORD_CONFIRM, value)
         return self
 
+    @allure.step
     def agree_to_privacy_policy(self):
         self.click(self._LOCATOR_AGREE_PRIVACY_POLICY)
         return self
 
+    @allure.step
     def register_random_person(self, person: Person) -> RegisterSuccessPage:
         self.fill_in_firstname(person.first_name())
         self.fill_in_lastname(person.last_name())
@@ -68,6 +78,7 @@ class RegisterPage(BasePage):
         self.click_to_continue()
         return RegisterSuccessPage(self.driver)
 
+    @allure.step
     def click_to_continue(self) -> RegisterSuccessPage:
         self.click(self._LOCATOR_CONTINUE_BUTTON)
         return RegisterSuccessPage(self.driver)

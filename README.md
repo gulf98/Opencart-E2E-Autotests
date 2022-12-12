@@ -1,4 +1,6 @@
 # Python-QA-Engineer-Module3
-Курс: Python QA Engineer - 2022 (OTUS).\
-ДЗ 5: Написание простых автотестов и основы Selenium.\
-ДЗ 6: PageObject
+Course: Python QA Engineer - 2022 (OTUS).\
+Homework 5: Writing simple autotests and the basics of Selenium\
+Homework 6: PageObject\
+Homework 7: Logging and reporting(Allure)\
+Homework 8: Selenoid

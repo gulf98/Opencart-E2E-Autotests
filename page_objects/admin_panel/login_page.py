@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from page_objects.admin_panel.main_page import MainPage
@@ -15,6 +16,7 @@ class LoginPage(BasePageObject):
         super().__init__(driver)
         driver.get(driver.base_url + "/admin")
 
+    @allure.step
     def check_for_visible_elements(self):
         self.visible_element(self._LOCATOR_USERNAME)
         self.visible_element(self._LOCATOR_PASSWORD)
@@ -23,18 +25,22 @@ class LoginPage(BasePageObject):
         self.visible_element(self._LOCATOR_LINK_TO_OPENCART)
         return self
 
+    @allure.step
     def fill_in_username(self, value: str):
         self.input(self._LOCATOR_USERNAME, value)
         return self
 
+    @allure.step
     def fill_in_password(self, value: str):
         self.input(self._LOCATOR_PASSWORD, value)
         return self
 
+    @allure.step
     def click_to_login(self) -> MainPage:
         self.click(self._LOCATOR_LOGIN_BUTTON)
         return MainPage(self.driver)
 
+    @allure.step
     def login(self, username: str, password: str) -> MainPage:
         self.fill_in_username(username)
         self.fill_in_password(password)

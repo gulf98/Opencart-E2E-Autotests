@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from page_objects.admin_panel.products_page import ProductsPage
@@ -11,10 +12,12 @@ class MainPage(BasePageObject):
     def __init__(self, driver):
         super().__init__(driver)
 
+    @allure.step
     def click_to_menu_catalog(self):
         self.click(self._LOCATOR_MENU_CATALOG)
         return self
 
+    @allure.step
     def click_to_menu_catalog_products(self) -> ProductsPage:
         self.click(self._LOCATOR_MENU_CATALOG_PRODUCTS)
         return ProductsPage(self.driver)

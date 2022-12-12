@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from page_objects.store.pages.base_page import BasePage
@@ -19,6 +20,7 @@ class MainPage(BasePage):
         self.product_card_list = ProductCardList(driver)
         driver.get(driver.base_url)
 
+    @allure.step
     def check_for_visible_elements(self):
         self.visible_element(self._LOCATOR_SLIDESHOW)
         self.visible_elements(self._LOCATOR_SLIDESHOW_PAGINATION_BULLETS)
@@ -27,6 +29,7 @@ class MainPage(BasePage):
         self.visible_elements(self._LOCATOR_CAROUSEL_PAGINATION_BULLETS)
         return self
 
+    @allure.step
     def check_for_present_elements(self):
         self.present_element(self._LOCATOR_SLIDESHOW_BUTTON_PREV)
         self.present_element(self._LOCATOR_SLIDESHOW_BUTTON_NEXT)

@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from page_objects.base_page_object import BasePageObject
@@ -11,11 +12,14 @@ class CurrencyDropdown(BasePageObject):
     def __init__(self, driver):
         super().__init__(driver)
 
+    @allure.step
     def select_euro(self) -> None:
         self.click(self._LOCATOR_EURO)
 
+    @allure.step
     def select_pound_sterling(self) -> None:
         self.click(self._LOCATOR_POUND_STERLING)
 
+    @allure.step
     def select_dollar(self) -> None:
         self.click(self._LOCATOR_DOLLAR)

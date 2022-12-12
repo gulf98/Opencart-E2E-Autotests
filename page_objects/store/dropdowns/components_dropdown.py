@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from page_objects.base_page_object import BasePageObject
@@ -14,22 +15,27 @@ class ComponentsDropdown(BasePageObject):
     def __init__(self, driver):
         super().__init__(driver)
 
+    @allure.step
     def open_mice(self) -> CatalogPage:
         self.click(self._LOCATOR_MICE)
         return CatalogPage(self.driver)
 
+    @allure.step
     def open_monitors(self) -> CatalogPage:
         self.click(self._LOCATOR_MONITORS)
         return CatalogPage(self.driver)
 
+    @allure.step
     def open_printers(self) -> CatalogPage:
         self.click(self._LOCATOR_PRINTERS)
         return CatalogPage(self.driver)
 
+    @allure.step
     def open_scanners(self) -> CatalogPage:
         self.click(self._LOCATOR_SCANNERS)
         return CatalogPage(self.driver)
 
+    @allure.step
     def open_web_cameras(self) -> CatalogPage:
         self.click(self._LOCATOR_WEB)
         return CatalogPage(self.driver)

@@ -40,11 +40,13 @@ def pytest_addoption(parser):
         help="headless mode, bool type. Default False.")
     parser.addoption(
         "--executor",
-        default=DEFAULT_EXECUTOR
+        default=DEFAULT_EXECUTOR,
+        help="if executor!=local - autotests will run remotely in selenoid"
     )
     parser.addoption(
         "--browser_version",
-        default=DEFAULT_SELENOID_BROWSER_VERSION
+        default=DEFAULT_SELENOID_BROWSER_VERSION,
+        help="browser version for selenoid browser"
     )
 
 
@@ -93,10 +95,7 @@ def driver(request) -> WebDriver:
             "acceptInsecureCerts": True,
             "timeZone": "Europe/Moscow"
         }
-        driver = webdriver.Remote(
-            command_executor=executor_url,
-            desired_capabilities=capabilities
-        )
+        driver = webdriver.Remote(command_executor=executor_url, desired_capabilities=capabilities)
 
     request.addfinalizer(driver.close)
 

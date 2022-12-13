@@ -22,15 +22,15 @@ class BasePageObject:
         self.logger = self.__logger_init()
 
     def __logger_init(self):
-        _logger = logging.getLogger(type(self).__name__)
+        logger = logging.getLogger(type(self).__name__)
         os.makedirs("logs", exist_ok=True)
         file = logging.FileHandler(f"logs/{self.driver.test_name}.log")
         file.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(name)s - %(message)s"))
-        if _logger.hasHandlers():
-            _logger.handlers.clear()
-        _logger.addHandler(file)
-        _logger.setLevel(self.driver.log_level)
-        return _logger
+        if logger.hasHandlers():
+            logger.handlers.clear()
+        logger.addHandler(file)
+        logger.setLevel(self.driver.log_level)
+        return logger
 
     def present_element(self, locator: tuple) -> WebElement:
         self.logger.info(f"Waiting for an element {locator} to appear")

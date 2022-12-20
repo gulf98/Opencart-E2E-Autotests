@@ -16,8 +16,9 @@ class BasePageObject:
     _WEB_DRIVER_WAIT_TIMEOUT = 5
     _ACTION_CHAINS_PAUSE = 0.1
 
-    def __init__(self, driver: WebDriver):
+    def __init__(self, driver: WebDriver, parent_object=None):
         self.driver = driver
+        self.parent_object = parent_object
         self.web_driver_wait = WebDriverWait(driver=driver, timeout=self._WEB_DRIVER_WAIT_TIMEOUT)
         self.logger = self.__logger_init()
 
@@ -38,11 +39,6 @@ class BasePageObject:
             return self.web_driver_wait.until(EC.presence_of_element_located(locator))
         except TimeoutException:
             self.logger.error(f"Did not wait for the element to appear in the DOM {locator}")
-            allure.attach(
-                body=self.driver.get_screenshot_as_png(),
-                name="screenshot_image",
-                attachment_type=allure.attachment_type.PNG
-            )
             raise TimeoutException(f"Did not wait for the element to appear in the DOM {locator}")
 
     def visible_element(self, locator: tuple) -> WebElement:
@@ -51,11 +47,6 @@ class BasePageObject:
             return self.web_driver_wait.until(EC.visibility_of_element_located(locator))
         except TimeoutException:
             self.logger.error(f"Didn't wait for element to be visible {locator}")
-            allure.attach(
-                body=self.driver.get_screenshot_as_png(),
-                name="screenshot_image",
-                attachment_type=allure.attachment_type.PNG
-            )
             raise TimeoutException(f"Didn't wait for element to be visible {locator}")
 
     def visible_elements(self, locator: tuple) -> List[WebElement]:
@@ -64,11 +55,6 @@ class BasePageObject:
             return self.web_driver_wait.until(EC.visibility_of_all_elements_located(locator))
         except TimeoutException:
             self.logger.error(f"Didn't wait for elements to be visible {locator}")
-            allure.attach(
-                body=self.driver.get_screenshot_as_png(),
-                name="screenshot_image",
-                attachment_type=allure.attachment_type.PNG
-            )
             raise TimeoutException(f"Didn't wait for elements to be visible {locator}")
 
     def click(self, locator: tuple) -> None:
@@ -92,11 +78,6 @@ class BasePageObject:
             return self.web_driver_wait.until(EC.text_to_be_present_in_element(locator, text))
         except TimeoutException:
             self.logger.error(f"Did not wait for the element to appear in the DOM {locator}")
-            allure.attach(
-                body=self.driver.get_screenshot_as_png(),
-                name="screenshot_image",
-                attachment_type=allure.attachment_type.PNG
-            )
             raise TimeoutException(f"Did not wait for the element to appear in the DOM {locator}")
 
     def present_alert(self) -> Alert:
@@ -105,9 +86,4 @@ class BasePageObject:
             return self.web_driver_wait.until(EC.alert_is_present())
         except TimeoutException:
             self.logger.error(f"Didn't wait for the alert")
-            allure.attach(
-                body=self.driver.get_screenshot_as_png(),
-                name="screenshot_image",
-                attachment_type=allure.attachment_type.PNG
-            )
             raise TimeoutException(f"Didn't wait for the alert")

@@ -14,7 +14,10 @@ class LoginPage(BasePageObject):
 
     def __init__(self, driver):
         super().__init__(driver)
-        driver.get(driver.base_url + "/admin")
+
+    def open_page(self):
+        self.driver.get(self.driver.base_url + "/admin")
+        return self
 
     @allure.step
     def check_for_visible_elements(self):
@@ -23,7 +26,6 @@ class LoginPage(BasePageObject):
         self.visible_element(self._LOCATOR_FORGOTTEN_PASSWORD)
         self.visible_element(self._LOCATOR_LOGIN_BUTTON)
         self.visible_element(self._LOCATOR_LINK_TO_OPENCART)
-        return self
 
     @allure.step
     def fill_in_username(self, value: str):

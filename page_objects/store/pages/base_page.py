@@ -17,7 +17,7 @@ class BasePage(BasePageObject):
     def open_currency_dropdown(self):
         self.click(self._LOCATOR_CURRENCY_DROPDOWN)
         from page_objects.store.dropdowns.currency_dropdown import CurrencyDropdown
-        return CurrencyDropdown(self.driver)
+        return CurrencyDropdown(driver=self.driver, parent_object=self)
 
     @allure.step
     def is_present_currency(self, text: str) -> bool:

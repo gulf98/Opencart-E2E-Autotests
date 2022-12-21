@@ -14,7 +14,7 @@ class CatalogPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.product_card_list = ProductCardList(driver)
+        self.product_card_list = ProductCardList(driver=driver, parent_object=self)
 
     @allure.step
     def check_for_visible_elements(self):
@@ -23,4 +23,3 @@ class CatalogPage(BasePage):
         self.visible_element(self._LOCATOR_GRID_VIEW_BUTTON)
         self.visible_element(self._LOCATOR_SORT_DROPDOWN)
         self.visible_element(self._LOCATOR_PRODUCT_SHOW_LIMIT)
-        return self

@@ -17,8 +17,11 @@ class MainPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.product_card_list = ProductCardList(driver)
-        driver.get(driver.base_url)
+        self.product_card_list = ProductCardList(driver=driver, parent_object=self)
+
+    def open_page(self):
+        self.driver.get(self.driver.base_url)
+        return self
 
     @allure.step
     def check_for_visible_elements(self):

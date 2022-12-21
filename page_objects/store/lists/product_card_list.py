@@ -10,8 +10,8 @@ class ProductCardList(BasePageObject):
     _LOCATOR_NAMED_LINK_TO_PRODUCT_PAGE = (By.CSS_SELECTOR, ".product-thumb .caption h4 a")
     _LOCATOR_PRODUCT_CARD_PRICE_ = (By.CSS_SELECTOR, ".product-thumb p.price")
 
-    def __init__(self, driver):
-        super().__init__(driver)
+    def __init__(self, driver, parent_object):
+        super().__init__(driver=driver, parent_object=parent_object)
 
     @allure.step
     def open_product_card_page_by_index(self, index: int) -> ProductCardPage:
@@ -29,5 +29,4 @@ class ProductCardList(BasePageObject):
     @allure.step
     def get_product_price_by_index(self, index: int) -> str:
         return self.visible_elements(self._LOCATOR_PRODUCT_CARD_LIST)[index] \
-            .find_element(*self._LOCATOR_PRODUCT_CARD_PRICE_) \
-            .text
+            .find_element(*self._LOCATOR_PRODUCT_CARD_PRICE_).text

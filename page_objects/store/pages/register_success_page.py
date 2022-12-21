@@ -17,5 +17,5 @@ class RegisterSuccessPage(BasePage):
         return self
 
     @allure.step
-    def get_success_title_text(self) -> str:
+    def get_success_header_text(self) -> str:
         return self.visible_element(self._LOCATOR_SUCCESS_HEADER).text

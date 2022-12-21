@@ -1,6 +1,7 @@
 import allure
 from selenium.webdriver.common.by import By
 
+from page_objects.store.pages.AccountPage import AccountPage
 from page_objects.store.pages.base_page import BasePage
 
 
@@ -28,7 +29,8 @@ class LoginPage(BasePage):
         return self
 
     @allure.step
-    def login(self, email: str, password: str):
+    def login(self, email: str, password: str) -> AccountPage:
         self.fill_in_email(email)
         self.fill_in_password(password)
         self.click_to_login()
+        return AccountPage(self.driver)

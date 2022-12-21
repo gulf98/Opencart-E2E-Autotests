@@ -1,19 +1,22 @@
 import os
+
+import allure
 import pytest
-import logging
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.remote.webdriver import WebDriver
 
-DEFAULT_BROWSER = "chrome"
-DEFAULT_OPENCART_BASE_URL = "http://192.168.0.105:8081"
-DEFAULT_SELENIUM_DRIVERS_PATH = "~/selenium_drivers/"
-DEFAULT_HEADLESS_MODE = False
-DEFAULT_EXECUTOR = "192.168.0.105"
-DEFAULT_SELENOID_BROWSER_VERSION = "108.0"
-DEFAULT_LOGGING_LEVEL = logging.DEBUG
+from config import (
+    DEFAULT_BROWSER,
+    DEFAULT_OPENCART_BASE_URL,
+    DEFAULT_SELENIUM_DRIVERS_PATH,
+    DEFAULT_HEADLESS_MODE,
+    DEFAULT_EXECUTOR,
+    DEFAULT_SELENOID_BROWSER_VERSION,
+    DEFAULT_LOGGING_LEVEL
+)
 
 
 def pytest_addoption(parser):
@@ -97,12 +100,29 @@ def driver(request) -> WebDriver:
         }
         driver = webdriver.Remote(command_executor=executor_url, desired_capabilities=capabilities)
 
-    request.addfinalizer(driver.close)
+    def finalizer():
+        if request.node.result != "passed":
+            allure.attach(
+                body=driver.get_screenshot_as_png(),
+                name="screenshot",
+                attachment_type=allure.attachment_type.PNG
+            )
+        driver.close()
+
+    request.addfinalizer(finalizer)
 
     driver.log_level = DEFAULT_LOGGING_LEVEL
     driver.test_name = request.node.name
 
     driver.maximize_window()
     driver.base_url = base_url
-
     return driver
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item):
+    outcome = yield
+    result = outcome.get_result()
+
+    if result.when == 'call':
+        item.result = result.outcome

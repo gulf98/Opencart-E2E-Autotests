@@ -22,7 +22,7 @@ class RegisterPage(BasePage):
     _LOCATOR_PASSWORD_TEXT_DANGER = (By.CSS_SELECTOR, "fieldset:nth-child(2) > div:nth-child(2) [class='text-danger']")
     _LOCATOR_PASSWORD_CONFIRM_TEXT_DANGER = \
         (By.CSS_SELECTOR, "fieldset:nth-child(2) > div:nth-child(3) [class='text-danger']")
-    _LOCATOR_PRIVACY_POLICY_ALERT_DANGER = (By.CSS_SELECTOR, "div[class*='alert-danger']")
+    _LOCATOR_ALERT_DANGER = (By.CSS_SELECTOR, "div[class*='alert-danger']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -136,5 +136,5 @@ class RegisterPage(BasePage):
         return self.visible_element(self._LOCATOR_PASSWORD_CONFIRM_TEXT_DANGER).text
 
     @allure.step
-    def get_privacy_policy_danger_text(self) -> str:
-        return self.visible_element(self._LOCATOR_PRIVACY_POLICY_ALERT_DANGER).text
+    def get_alert_danger_text(self) -> str:
+        return self.visible_element(self._LOCATOR_ALERT_DANGER).text

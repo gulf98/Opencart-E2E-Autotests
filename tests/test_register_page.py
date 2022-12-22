@@ -27,11 +27,12 @@ def test_register_page_elements_visibility(driver):
 @pytest.mark.smoke
 @allure.title("Registering a new user")
 def test_registering_new_user(driver):
+    person = correct_random_person()
     register_success_page = MainPage(driver) \
         .open_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
-        .register_person(correct_random_person()) \
+        .register_person(person) \
         .wait_for_page_load()
     assert register_success_page.get_success_header_text() == "Your Account Has Been Created!"
 
@@ -52,7 +53,7 @@ def test_registering_existing_user(driver):
         .open_register_page() \
         .try_to_register_person(person)
     assert register_page.get_header_text() == "Register Account"
-    assert register_page.get_privacy_policy_danger_text() == "Warning: E-Mail Address is already registered!"
+    assert register_page.get_alert_danger_text() == "Warning: E-Mail Address is already registered!"
 
 
 @pytest.mark.regression
@@ -66,7 +67,7 @@ def test_registering_non_accepted_privacy_policy(driver):
         .fill_all_personal_fields(person) \
         .try_to_continue()
     assert register_page.get_header_text() == "Register Account"
-    assert register_page.get_privacy_policy_danger_text() == "Warning: You must agree to the Privacy Policy!"
+    assert register_page.get_alert_danger_text() == "Warning: You must agree to the Privacy Policy!"
 
 
 @pytest.mark.regression

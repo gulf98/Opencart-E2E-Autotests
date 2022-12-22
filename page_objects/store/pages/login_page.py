@@ -1,7 +1,7 @@
 import allure
 from selenium.webdriver.common.by import By
 
-from page_objects.store.pages.AccountPage import AccountPage
+from page_objects.store.pages.account_page import AccountPage
 from page_objects.store.pages.base_page import BasePage
 
 

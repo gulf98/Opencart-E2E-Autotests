@@ -1,13 +1,6 @@
-# Python-QA-Engineer-Module3
-Course: Python QA Engineer - 2022 (OTUS).\
-Homework 5: Writing simple autotests and the basics of Selenium.\
-Homework 6: PageObject.\
-Homework 7: Logging and reporting(Allure).\
-Homework 8: Selenoid.\
-Homework 12: Write a Dockerfile for your project.\
-Project work: Test automation for Opencart web application.
+# Opencart-E2E-Autotests
+Technologies used: python, pytest, pytest-xdist, selenoid, mimesis, selenium, docker, allure.
 
-Technologies used: python, pytest, pytest-xdist, selenoid, mimesis, selenium, docker, allure.\
 Before starting you need:
 - deploy opencart app
 - install python 3.9+
@@ -19,7 +12,7 @@ Run autotests command: pytest --param1 value1 --param2 value2 ... --paramN value
 You can also run autotests in docker:
 - install docker desktop
 - build image: docker build -t <image_name> .
-- start the container by passing parameters for pytest: docker run <image_name> --browser firefox
+- start the container by passing parameters for pytest: docker run <image_name> --param1 value1 ... --paramN valueN
 
 To generate a report, you need to run the command: allure generate allure-results.
 

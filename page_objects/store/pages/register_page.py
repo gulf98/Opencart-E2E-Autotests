@@ -1,7 +1,8 @@
 import allure
 from selenium.webdriver.common.by import By
 
-from infrastructure.types import Locator
+
+from infrastructure.types import Locator, Person
 from page_objects.store.pages.base_page import BasePage
 from page_objects.store.pages.register_success_page import RegisterSuccessPage
 
@@ -83,17 +84,17 @@ class RegisterPage(BasePage):
         return RegisterSuccessPage(self.driver)
 
     @allure.step
-    def fill_all_personal_fields(self, person: dict):
-        self.fill_in_firstname(person["firstname"])
-        self.fill_in_lastname(person["lastname"])
-        self.fill_in_email(person["email"])
-        self.fill_in_telephone(person["telephone"])
-        self.fill_in_password(person["password"])
-        self.fill_in_password_confirm(person["password_confirm"])
+    def fill_all_personal_fields(self, person: Person):
+        self.fill_in_firstname(person.firstname)
+        self.fill_in_lastname(person.lastname)
+        self.fill_in_email(person.email)
+        self.fill_in_telephone(person.telephone)
+        self.fill_in_password(person.password)
+        self.fill_in_password_confirm(person.password_confirm)
         return self
 
     @allure.step
-    def register_person(self, person: dict) -> RegisterSuccessPage:
+    def register_person(self, person: Person) -> RegisterSuccessPage:
         self.fill_all_personal_fields(person)
         self.agree_to_privacy_policy()
         self.click_to_continue()
@@ -105,7 +106,7 @@ class RegisterPage(BasePage):
         return self
 
     @allure.step
-    def try_to_register_person(self, person: dict):
+    def try_to_register_person(self, person: Person):
         self.fill_all_personal_fields(person)
         self.agree_to_privacy_policy()
         self.try_to_continue()

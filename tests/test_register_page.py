@@ -2,16 +2,7 @@ import allure
 import pytest
 
 from page_objects.store.pages.main_page import MainPage
-from infrastructure.test_data.personal_data import (
-    correct_random_person,
-    person_with_empty_firstname,
-    person_with_empty_lastname,
-    person_with_empty_email,
-    person_with_empty_telephone,
-    person_with_empty_password,
-    person_with_empty_password_confirm,
-    person_with_different_passwords
-)
+from infrastructure.person_generator import PersonGenerator
 
 
 @pytest.mark.smoke
@@ -27,7 +18,7 @@ def test_register_page_elements_visibility(driver):
 @pytest.mark.smoke
 @allure.title("Registering a new user")
 def test_registering_new_user(driver):
-    person = correct_random_person()
+    person = PersonGenerator.create_correct_random_person()
     register_success_page = MainPage(driver) \
         .open_page() \
         .open_my_account_dropdown() \
@@ -40,7 +31,7 @@ def test_registering_new_user(driver):
 @pytest.mark.regression
 @allure.title("Attempt to register an existing user")
 def test_registering_existing_user(driver):
-    person = correct_random_person()
+    person = PersonGenerator.create_correct_random_person()
     register_page = MainPage(driver) \
         .open_page() \
         .open_my_account_dropdown() \
@@ -59,7 +50,7 @@ def test_registering_existing_user(driver):
 @pytest.mark.regression
 @allure.title("Registration attempt with a non-accepted privacy policy")
 def test_registering_non_accepted_privacy_policy(driver):
-    person = correct_random_person()
+    person = PersonGenerator.create_correct_random_person()
     register_page = MainPage(driver) \
         .open_page() \
         .open_my_account_dropdown() \
@@ -73,7 +64,7 @@ def test_registering_non_accepted_privacy_policy(driver):
 @pytest.mark.regression
 @allure.title("Attempt to register with an empty firstname")
 def test_registering_empty_firstname(driver):
-    person = person_with_empty_firstname()
+    person = PersonGenerator.create_person_with_empty_firstname()
     register_page = MainPage(driver) \
         .open_page() \
         .open_my_account_dropdown() \
@@ -86,7 +77,7 @@ def test_registering_empty_firstname(driver):
 @pytest.mark.regression
 @allure.title("Attempt to register with an empty lastname")
 def test_registering_empty_lastname(driver):
-    person = person_with_empty_lastname()
+    person = PersonGenerator.create_person_with_empty_lastname()
     register_page = MainPage(driver) \
         .open_page() \
         .open_my_account_dropdown() \
@@ -99,7 +90,7 @@ def test_registering_empty_lastname(driver):
 @pytest.mark.regression
 @allure.title("Attempt to register with an empty email")
 def test_registering_empty_email(driver):
-    person = person_with_empty_email()
+    person = PersonGenerator.create_person_with_empty_email()
     register_page = MainPage(driver) \
         .open_page() \
         .open_my_account_dropdown() \
@@ -112,7 +103,7 @@ def test_registering_empty_email(driver):
 @pytest.mark.regression
 @allure.title("Attempt to register with an empty telephone")
 def test_registering_empty_telephone(driver):
-    person = person_with_empty_telephone()
+    person = PersonGenerator.create_person_with_empty_telephone()
     register_page = MainPage(driver) \
         .open_page() \
         .open_my_account_dropdown() \
@@ -125,7 +116,7 @@ def test_registering_empty_telephone(driver):
 @pytest.mark.regression
 @allure.title("Attempt to register with an empty password")
 def test_registering_empty_password(driver):
-    person = person_with_empty_password()
+    person = PersonGenerator.create_person_with_empty_password()
     register_page = MainPage(driver) \
         .open_page() \
         .open_my_account_dropdown() \
@@ -138,7 +129,7 @@ def test_registering_empty_password(driver):
 @pytest.mark.regression
 @allure.title("Attempt to register with an empty confirm")
 def test_registering_empty_password_confirm(driver):
-    person = person_with_empty_password_confirm()
+    person = PersonGenerator.create_person_with_empty_password_confirm()
     register_page = MainPage(driver) \
         .open_page() \
         .open_my_account_dropdown() \
@@ -151,7 +142,7 @@ def test_registering_empty_password_confirm(driver):
 @pytest.mark.regression
 @allure.title("Attempt to register with different passwords")
 def test_registering_different_passwords(driver):
-    person = person_with_different_passwords()
+    person = PersonGenerator.create_person_with_different_passwords()
     register_page = MainPage(driver) \
         .open_page() \
         .open_my_account_dropdown() \

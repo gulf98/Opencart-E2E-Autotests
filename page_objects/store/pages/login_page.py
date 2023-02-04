@@ -1,31 +1,35 @@
 import allure
 from selenium.webdriver.common.by import By
 
+from infrastructure.types import Locator
 from page_objects.store.pages.account_page import AccountPage
 from page_objects.store.pages.base_page import BasePage
 
 
+class LoginPageLocators:
+    EMAIL = Locator(By.CSS_SELECTOR, "#input-email")
+    PASSWORD = Locator(By.CSS_SELECTOR, "#input-password")
+    LOGIN_BUTTON = Locator(By.CSS_SELECTOR, "input[value='Login']")
+
+
 class LoginPage(BasePage):
-    _LOCATOR_EMAIL = (By.CSS_SELECTOR, "#input-email")
-    _LOCATOR_PASSWORD = (By.CSS_SELECTOR, "#input-password")
-    _LOCATOR_LOGIN_BUTTON = (By.CSS_SELECTOR, "input[value='Login']")
 
     def __init__(self, driver):
         super().__init__(driver)
 
     @allure.step
     def fill_in_email(self, value: str):
-        self.input(self._LOCATOR_EMAIL, value)
+        self.input(LoginPageLocators.EMAIL, value)
         return self
 
     @allure.step
     def fill_in_password(self, value: str):
-        self.input(self._LOCATOR_PASSWORD, value)
+        self.input(LoginPageLocators.PASSWORD, value)
         return self
 
     @allure.step
     def click_to_login(self):
-        self.click(self._LOCATOR_LOGIN_BUTTON)
+        self.click(LoginPageLocators.LOGIN_BUTTON)
         return self
 
     @allure.step

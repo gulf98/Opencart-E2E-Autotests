@@ -1,7 +1,10 @@
-from collections import namedtuple
 from enum import Enum
+from typing import NamedTuple
 
-Locator = namedtuple("Locator", "strategy selector")
+
+class Locator(NamedTuple):
+    strategy: str
+    selector: str
 
 
 class Currency(Enum):

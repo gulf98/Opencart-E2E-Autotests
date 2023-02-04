@@ -8,7 +8,7 @@ from page_objects.store.pages.main_page import MainPage
 
 @pytest.mark.regression
 @allure.title("Currency change test")
-@pytest.mark.parametrize("currency_locators, expected_currency", list(zip([*CurrencyLocators], [*Currency])))
+@pytest.mark.parametrize("currency_locators, expected_currency", list(zip(list(CurrencyLocators), list(Currency))))
 def test_switch_currency(driver, currency_locators, expected_currency):
     main_page = MainPage(driver) \
         .open_page() \

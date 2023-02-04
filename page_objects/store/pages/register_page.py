@@ -1,81 +1,85 @@
 import allure
 from selenium.webdriver.common.by import By
 
+from infrastructure.types import Locator
 from page_objects.store.pages.base_page import BasePage
 from page_objects.store.pages.register_success_page import RegisterSuccessPage
 
 
+class RegisterPageLocators:
+    FIRSTNAME = Locator(By.CSS_SELECTOR, "#input-firstname")
+    LASTNAME = Locator(By.CSS_SELECTOR, "#input-lastname")
+    EMAIL = Locator(By.CSS_SELECTOR, "#input-email")
+    TELEPHONE = Locator(By.CSS_SELECTOR, "#input-telephone")
+    PASSWORD = Locator(By.CSS_SELECTOR, "#input-password")
+    PASSWORD_CONFIRM = Locator(By.CSS_SELECTOR, "#input-confirm")
+    AGREE_PRIVACY_POLICY = Locator(By.CSS_SELECTOR, "input[name='agree']")
+    CONTINUE_BUTTON = Locator(By.CSS_SELECTOR, "input[value='Continue']")
+    HEADER = Locator(By.CSS_SELECTOR, "h1")
+    FIRST_NAME_TEXT_DANGER = Locator(By.CSS_SELECTOR, "#account div:nth-child(3) [class='text-danger']")
+    LAST_NAME_TEXT_DANGER = Locator(By.CSS_SELECTOR, "#account div:nth-child(4) [class='text-danger']")
+    EMAIL_TEXT_DANGER = Locator(By.CSS_SELECTOR, "#account div:nth-child(5) [class='text-danger']")
+    TELEPHONE_TEXT_DANGER = Locator(By.CSS_SELECTOR, "#account div:nth-child(6) [class='text-danger']")
+    PASSWORD_TEXT_DANGER = Locator(By.CSS_SELECTOR, "fieldset:nth-child(2) > div:nth-child(2) [class='text-danger']")
+    PASSWORD_CONFIRM_TEXT_DANGER = \
+        Locator(By.CSS_SELECTOR, "fieldset:nth-child(2) > div:nth-child(3) [class='text-danger']")
+    ALERT_DANGER = Locator(By.CSS_SELECTOR, "div[class*='alert-danger']")
+
+
 class RegisterPage(BasePage):
-    _LOCATOR_FIRSTNAME = (By.CSS_SELECTOR, "#input-firstname")
-    _LOCATOR_LASTNAME = (By.CSS_SELECTOR, "#input-lastname")
-    _LOCATOR_EMAIL = (By.CSS_SELECTOR, "#input-email")
-    _LOCATOR_TELEPHONE = (By.CSS_SELECTOR, "#input-telephone")
-    _LOCATOR_PASSWORD = (By.CSS_SELECTOR, "#input-password")
-    _LOCATOR_PASSWORD_CONFIRM = (By.CSS_SELECTOR, "#input-confirm")
-    _LOCATOR_AGREE_PRIVACY_POLICY = (By.CSS_SELECTOR, "input[name='agree']")
-    _LOCATOR_CONTINUE_BUTTON = (By.CSS_SELECTOR, "input[value='Continue']")
-    _LOCATOR_HEADER = (By.CSS_SELECTOR, "h1")
-    _LOCATOR_FIRST_NAME_TEXT_DANGER = (By.CSS_SELECTOR, "#account div:nth-child(3) [class='text-danger']")
-    _LOCATOR_LAST_NAME_TEXT_DANGER = (By.CSS_SELECTOR, "#account div:nth-child(4) [class='text-danger']")
-    _LOCATOR_EMAIL_TEXT_DANGER = (By.CSS_SELECTOR, "#account div:nth-child(5) [class='text-danger']")
-    _LOCATOR_TELEPHONE_TEXT_DANGER = (By.CSS_SELECTOR, "#account div:nth-child(6) [class='text-danger']")
-    _LOCATOR_PASSWORD_TEXT_DANGER = (By.CSS_SELECTOR, "fieldset:nth-child(2) > div:nth-child(2) [class='text-danger']")
-    _LOCATOR_PASSWORD_CONFIRM_TEXT_DANGER = \
-        (By.CSS_SELECTOR, "fieldset:nth-child(2) > div:nth-child(3) [class='text-danger']")
-    _LOCATOR_ALERT_DANGER = (By.CSS_SELECTOR, "div[class*='alert-danger']")
 
     def __init__(self, driver):
         super().__init__(driver)
 
     @allure.step
     def check_for_visible_elements(self):
-        self.visible_element(self._LOCATOR_FIRSTNAME)
-        self.visible_element(self._LOCATOR_LASTNAME)
-        self.visible_element(self._LOCATOR_EMAIL)
-        self.visible_element(self._LOCATOR_TELEPHONE)
-        self.visible_element(self._LOCATOR_PASSWORD)
-        self.visible_element(self._LOCATOR_PASSWORD_CONFIRM)
-        self.visible_element(self._LOCATOR_AGREE_PRIVACY_POLICY)
-        self.visible_element(self._LOCATOR_CONTINUE_BUTTON)
+        self.visible_element(RegisterPageLocators.FIRSTNAME)
+        self.visible_element(RegisterPageLocators.LASTNAME)
+        self.visible_element(RegisterPageLocators.EMAIL)
+        self.visible_element(RegisterPageLocators.TELEPHONE)
+        self.visible_element(RegisterPageLocators.PASSWORD)
+        self.visible_element(RegisterPageLocators.PASSWORD_CONFIRM)
+        self.visible_element(RegisterPageLocators.AGREE_PRIVACY_POLICY)
+        self.visible_element(RegisterPageLocators.CONTINUE_BUTTON)
 
     @allure.step
     def fill_in_firstname(self, value: str):
-        self.input(self._LOCATOR_FIRSTNAME, value)
+        self.input(RegisterPageLocators.FIRSTNAME, value)
         return self
 
     @allure.step
     def fill_in_lastname(self, value: str):
-        self.input(self._LOCATOR_LASTNAME, value)
+        self.input(RegisterPageLocators.LASTNAME, value)
         return self
 
     @allure.step
     def fill_in_email(self, value: str):
-        self.input(self._LOCATOR_EMAIL, value)
+        self.input(RegisterPageLocators.EMAIL, value)
         return self
 
     @allure.step
     def fill_in_telephone(self, value: str):
-        self.input(self._LOCATOR_TELEPHONE, value)
+        self.input(RegisterPageLocators.TELEPHONE, value)
         return self
 
     @allure.step
     def fill_in_password(self, value: str):
-        self.input(self._LOCATOR_PASSWORD, value)
+        self.input(RegisterPageLocators.PASSWORD, value)
         return self
 
     @allure.step
     def fill_in_password_confirm(self, value: str):
-        self.input(self._LOCATOR_PASSWORD_CONFIRM, value)
+        self.input(RegisterPageLocators.PASSWORD_CONFIRM, value)
         return self
 
     @allure.step
     def agree_to_privacy_policy(self):
-        self.click(self._LOCATOR_AGREE_PRIVACY_POLICY)
+        self.click(RegisterPageLocators.AGREE_PRIVACY_POLICY)
         return self
 
     @allure.step
     def click_to_continue(self) -> RegisterSuccessPage:
-        self.click(self._LOCATOR_CONTINUE_BUTTON)
+        self.click(RegisterPageLocators.CONTINUE_BUTTON)
         return RegisterSuccessPage(self.driver)
 
     @allure.step
@@ -97,7 +101,7 @@ class RegisterPage(BasePage):
 
     @allure.step
     def try_to_continue(self):
-        self.click(self._LOCATOR_CONTINUE_BUTTON)
+        self.click(RegisterPageLocators.CONTINUE_BUTTON)
         return self
 
     @allure.step
@@ -109,32 +113,32 @@ class RegisterPage(BasePage):
 
     @allure.step
     def get_header_text(self) -> str:
-        return self.visible_element(self._LOCATOR_HEADER).text
+        return self.visible_element(RegisterPageLocators.HEADER).text
 
     @allure.step
     def get_firstname_danger_text(self) -> str:
-        return self.visible_element(self._LOCATOR_FIRST_NAME_TEXT_DANGER).text
+        return self.visible_element(RegisterPageLocators.FIRST_NAME_TEXT_DANGER).text
 
     @allure.step
     def get_lastname_danger_text(self) -> str:
-        return self.visible_element(self._LOCATOR_LAST_NAME_TEXT_DANGER).text
+        return self.visible_element(RegisterPageLocators.LAST_NAME_TEXT_DANGER).text
 
     @allure.step
     def get_email_danger_text(self) -> str:
-        return self.visible_element(self._LOCATOR_EMAIL_TEXT_DANGER).text
+        return self.visible_element(RegisterPageLocators.EMAIL_TEXT_DANGER).text
 
     @allure.step
     def get_telephone_danger_text(self) -> str:
-        return self.visible_element(self._LOCATOR_TELEPHONE_TEXT_DANGER).text
+        return self.visible_element(RegisterPageLocators.TELEPHONE_TEXT_DANGER).text
 
     @allure.step
     def get_password_danger_text(self) -> str:
-        return self.visible_element(self._LOCATOR_PASSWORD_TEXT_DANGER).text
+        return self.visible_element(RegisterPageLocators.PASSWORD_TEXT_DANGER).text
 
     @allure.step
     def get_password_confirm_danger_text(self) -> str:
-        return self.visible_element(self._LOCATOR_PASSWORD_CONFIRM_TEXT_DANGER).text
+        return self.visible_element(RegisterPageLocators.PASSWORD_CONFIRM_TEXT_DANGER).text
 
     @allure.step
     def get_alert_danger_text(self) -> str:
-        return self.visible_element(self._LOCATOR_ALERT_DANGER).text
+        return self.visible_element(RegisterPageLocators.ALERT_DANGER).text

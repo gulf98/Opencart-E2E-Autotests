@@ -11,6 +11,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
+from infrastructure.types import Locator
+
 
 class BasePageObject:
     _WEB_DRIVER_WAIT_TIMEOUT = 5
@@ -33,7 +35,7 @@ class BasePageObject:
         logger.setLevel(self.driver.log_level)
         return logger
 
-    def present_element(self, locator: tuple) -> WebElement:
+    def present_element(self, locator: Locator) -> WebElement:
         self.logger.info(f"Waiting for an element {locator} to appear")
         try:
             return self.web_driver_wait.until(EC.presence_of_element_located(locator))
@@ -41,7 +43,7 @@ class BasePageObject:
             self.logger.error(f"Did not wait for the element to appear in the DOM {locator}")
             raise TimeoutException(f"Did not wait for the element to appear in the DOM {locator}")
 
-    def visible_element(self, locator: tuple) -> WebElement:
+    def visible_element(self, locator: Locator) -> WebElement:
         self.logger.info(f"Waiting for visible element {locator}")
         try:
             return self.web_driver_wait.until(EC.visibility_of_element_located(locator))
@@ -49,7 +51,7 @@ class BasePageObject:
             self.logger.error(f"Didn't wait for element to be visible {locator}")
             raise TimeoutException(f"Didn't wait for element to be visible {locator}")
 
-    def visible_elements(self, locator: tuple) -> List[WebElement]:
+    def visible_elements(self, locator: Locator) -> List[WebElement]:
         self.logger.info(f"Waiting for visible elements {locator}")
         try:
             return self.web_driver_wait.until(EC.visibility_of_all_elements_located(locator))
@@ -57,7 +59,7 @@ class BasePageObject:
             self.logger.error(f"Didn't wait for elements to be visible {locator}")
             raise TimeoutException(f"Didn't wait for elements to be visible {locator}")
 
-    def click(self, locator: tuple) -> None:
+    def click(self, locator: Locator) -> None:
         element = self.visible_element(locator)
         self.logger.info(f"Clicking on element {locator}")
         ActionChains(self.driver).move_to_element(element) \
@@ -65,14 +67,14 @@ class BasePageObject:
             .click() \
             .perform()
 
-    def input(self, locator: tuple, value: str) -> None:
+    def input(self, locator: Locator, value: str) -> None:
         element = self.visible_element(locator)
         self.logger.info(f"Input {value} in the {locator} field")
         self.click(locator)
         element.clear()
         element.send_keys(value)
 
-    def is_present_element_with_text(self, locator: tuple, text: str) -> bool:
+    def is_present_element_with_text(self, locator: Locator, text: str) -> bool:
         self.logger.info(f"Waiting for the {locator} element with the text {text} to appear in the DOM")
         try:
             return self.web_driver_wait.until(EC.text_to_be_present_in_element(locator, text))

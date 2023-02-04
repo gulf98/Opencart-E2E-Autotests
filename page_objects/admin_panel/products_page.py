@@ -1,14 +1,18 @@
 import allure
 from selenium.webdriver.common.by import By
 
+from infrastructure.types import Locator
 from page_objects.admin_panel.add_product_page import AddProductPage
 from page_objects.base_page_object import BasePageObject
 
 
+class ProductsPageLocators:
+    ADD_PRODUCT_BUTTON = Locator(By.CSS_SELECTOR, "a[data-original-title='Add New']")
+    DELETE_PRODUCT_BUTTON = Locator(By.CSS_SELECTOR, "button[data-original-title='Delete']")
+    SUCCESS_ALERT = Locator(By.CSS_SELECTOR, "div.alert.alert-success.alert-dismissible")
+
+
 class ProductsPage(BasePageObject):
-    _LOCATOR_ADD_PRODUCT_BUTTON = (By.CSS_SELECTOR, "a[data-original-title='Add New']")
-    _LOCATOR_DELETE_PRODUCT_BUTTON = (By.CSS_SELECTOR, "button[data-original-title='Delete']")
-    _LOCATOR_SUCCESS_ALERT = (By.CSS_SELECTOR, "div.alert.alert-success.alert-dismissible")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -17,12 +21,12 @@ class ProductsPage(BasePageObject):
 
     @allure.step
     def click_to_add_product(self) -> AddProductPage:
-        self.click(self._LOCATOR_ADD_PRODUCT_BUTTON)
+        self.click(ProductsPageLocators.ADD_PRODUCT_BUTTON)
         return AddProductPage(self.driver)
 
     @allure.step
     def click_to_delete_product(self):
-        self.click(self._LOCATOR_DELETE_PRODUCT_BUTTON)
+        self.click(ProductsPageLocators.DELETE_PRODUCT_BUTTON)
         return self
 
     @allure.step
@@ -37,4 +41,4 @@ class ProductsPage(BasePageObject):
 
     @allure.step
     def get_success_message(self) -> str:
-        return self.visible_element(self._LOCATOR_SUCCESS_ALERT).text
+        return self.visible_element(ProductsPageLocators.SUCCESS_ALERT).text

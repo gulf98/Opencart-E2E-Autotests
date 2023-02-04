@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from config import (
+from infrastructure.configuration import (
     DEFAULT_BROWSER,
     DEFAULT_OPENCART_BASE_URL,
     DEFAULT_SELENIUM_DRIVERS_PATH,

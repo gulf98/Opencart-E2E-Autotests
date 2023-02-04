@@ -4,7 +4,7 @@ from uuid import uuid4
 import allure
 import pytest
 
-from config import ADMIN_PANEL_CREDENTIALS
+from infrastructure.configuration import ADMIN_PANEL_CREDENTIALS
 from page_objects.admin_panel.login_page import LoginPage
 
 

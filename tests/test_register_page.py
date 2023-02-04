@@ -2,7 +2,7 @@ import allure
 import pytest
 
 from page_objects.store.pages.main_page import MainPage
-from test_data.personal_data import (
+from infrastructure.test_data.personal_data import (
     correct_random_person,
     person_with_empty_firstname,
     person_with_empty_lastname,

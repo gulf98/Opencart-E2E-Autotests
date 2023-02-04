@@ -2,7 +2,6 @@ import logging
 import os
 from typing import List
 
-import allure
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.remote.webdriver import WebDriver

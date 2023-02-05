@@ -1,6 +1,6 @@
 from mimesis import Person as PersonalDataGenerator
 
-from infrastructure.types import Person
+from utils.types import Person
 
 personal_data_generator = PersonalDataGenerator()
 

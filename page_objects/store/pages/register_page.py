@@ -2,7 +2,7 @@ import allure
 from selenium.webdriver.common.by import By
 
 
-from infrastructure.types import Locator, Person
+from utils.types import Locator, Person
 from page_objects.store.pages.base_page import BasePage
 from page_objects.store.pages.register_success_page import RegisterSuccessPage
 

@@ -4,23 +4,21 @@ from uuid import uuid4
 import allure
 import pytest
 
-from infrastructure.configuration import ADMIN_PANEL_CREDENTIALS
-from page_objects.admin_panel.login_page import LoginPage
+from utils.config import ADMIN_PANEL_CREDENTIALS
+from utils.page_switcher import PageSwitcher
 
 
 @pytest.mark.smoke
 @allure.title("Checking the visibility of elements on the admin panel login page")
 def test_admin_panel_login_page_elements_visibility(driver):
-    LoginPage(driver) \
-        .open_page() \
+    PageSwitcher(driver).open_admin_panel_login_page() \
         .check_for_visible_elements()
 
 
 @pytest.mark.smoke
 @allure.title("Adding new product in admin panel")
 def test_adding_new_product_in_admin_panel(driver):
-    actual_success_message = LoginPage(driver) \
-        .open_page() \
+    actual_success_message = PageSwitcher(driver).open_admin_panel_login_page() \
         .login(*ADMIN_PANEL_CREDENTIALS) \
         .click_to_menu_catalog() \
         .click_to_menu_catalog_products() \
@@ -38,8 +36,7 @@ def test_adding_new_product_in_admin_panel(driver):
 @pytest.mark.smoke
 @allure.title("Removing product from list in admin panel")
 def test_removing_product_from_list_in_admin_panel(driver):
-    actual_success_message = LoginPage(driver) \
-        .open_page() \
+    actual_success_message = PageSwitcher(driver).open_admin_panel_login_page() \
         .login(*ADMIN_PANEL_CREDENTIALS) \
         .click_to_menu_catalog() \
         .click_to_menu_catalog_products() \

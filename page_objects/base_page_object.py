@@ -10,7 +10,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
-from infrastructure.types import Locator
+from utils.types import Locator
 
 
 class BasePageObject:
@@ -20,6 +20,7 @@ class BasePageObject:
     def __init__(self, driver: WebDriver, parent_object=None):
         self.driver = driver
         self.parent_object = parent_object
+        self.base_url = driver.base_url
         self.web_driver_wait = WebDriverWait(driver=driver, timeout=self._WEB_DRIVER_WAIT_TIMEOUT)
         self.logger = self.__logger_init()
 

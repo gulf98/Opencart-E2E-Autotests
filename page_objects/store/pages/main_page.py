@@ -1,7 +1,7 @@
 import allure
 from selenium.webdriver.common.by import By
 
-from infrastructure.types import Locator
+from utils.types import Locator
 from page_objects.store.pages.base_page import BasePage
 from page_objects.store.lists.product_card_list import ProductCardList
 
@@ -22,10 +22,6 @@ class MainPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.product_card_list = ProductCardList(driver=driver, parent_object=self)
-
-    def open_page(self):
-        self.driver.get(self.driver.base_url)
-        return self
 
     @allure.step
     def check_for_visible_elements(self):

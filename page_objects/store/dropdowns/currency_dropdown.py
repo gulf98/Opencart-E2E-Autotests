@@ -3,7 +3,7 @@ from enum import Enum
 import allure
 from selenium.webdriver.common.by import By
 
-from infrastructure.types import Locator
+from utils.types import Locator
 from page_objects.base_page_object import BasePageObject
 
 

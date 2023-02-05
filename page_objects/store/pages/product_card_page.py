@@ -2,7 +2,7 @@ import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from infrastructure.types import Locator
+from utils.types import Locator
 from page_objects.store.pages.base_page import BasePage
 
 

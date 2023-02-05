@@ -1,7 +1,7 @@
 import allure
 from selenium.webdriver.common.by import By
 
-from infrastructure.types import Locator
+from utils.types import Locator
 from page_objects.store.lists.product_card_list import ProductCardList
 from page_objects.store.pages.base_page import BasePage
 

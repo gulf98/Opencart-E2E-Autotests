@@ -1,15 +1,14 @@
 import allure
 import pytest
 
-from page_objects.store.pages.main_page import MainPage
-from infrastructure.person_generator import PersonGenerator
+from utils.page_switcher import PageSwitcher
+from utils.person_generator import PersonGenerator
 
 
 @pytest.mark.smoke
 @allure.title("Checking the visibility of elements on the register page")
 def test_register_page_elements_visibility(driver):
-    MainPage(driver) \
-        .open_page() \
+    PageSwitcher(driver).open_store_main_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
         .check_for_visible_elements()
@@ -19,8 +18,7 @@ def test_register_page_elements_visibility(driver):
 @allure.title("Registering a new user")
 def test_registering_new_user(driver):
     person = PersonGenerator.create_correct_random_person()
-    register_success_page = MainPage(driver) \
-        .open_page() \
+    register_success_page = PageSwitcher(driver).open_store_main_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
         .register_person(person) \
@@ -32,8 +30,7 @@ def test_registering_new_user(driver):
 @allure.title("Attempt to register an existing user")
 def test_registering_existing_user(driver):
     person = PersonGenerator.create_correct_random_person()
-    register_page = MainPage(driver) \
-        .open_page() \
+    register_page = PageSwitcher(driver).open_store_main_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
         .register_person(person) \
@@ -51,8 +48,7 @@ def test_registering_existing_user(driver):
 @allure.title("Registration attempt with a non-accepted privacy policy")
 def test_registering_non_accepted_privacy_policy(driver):
     person = PersonGenerator.create_correct_random_person()
-    register_page = MainPage(driver) \
-        .open_page() \
+    register_page = PageSwitcher(driver).open_store_main_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
         .fill_all_personal_fields(person) \
@@ -65,8 +61,7 @@ def test_registering_non_accepted_privacy_policy(driver):
 @allure.title("Attempt to register with an empty firstname")
 def test_registering_empty_firstname(driver):
     person = PersonGenerator.create_person_with_empty_firstname()
-    register_page = MainPage(driver) \
-        .open_page() \
+    register_page = PageSwitcher(driver).open_store_main_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
         .try_to_register_person(person)
@@ -78,8 +73,7 @@ def test_registering_empty_firstname(driver):
 @allure.title("Attempt to register with an empty lastname")
 def test_registering_empty_lastname(driver):
     person = PersonGenerator.create_person_with_empty_lastname()
-    register_page = MainPage(driver) \
-        .open_page() \
+    register_page = PageSwitcher(driver).open_store_main_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
         .try_to_register_person(person)
@@ -91,8 +85,7 @@ def test_registering_empty_lastname(driver):
 @allure.title("Attempt to register with an empty email")
 def test_registering_empty_email(driver):
     person = PersonGenerator.create_person_with_empty_email()
-    register_page = MainPage(driver) \
-        .open_page() \
+    register_page = PageSwitcher(driver).open_store_main_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
         .try_to_register_person(person)
@@ -104,8 +97,7 @@ def test_registering_empty_email(driver):
 @allure.title("Attempt to register with an empty telephone")
 def test_registering_empty_telephone(driver):
     person = PersonGenerator.create_person_with_empty_telephone()
-    register_page = MainPage(driver) \
-        .open_page() \
+    register_page = PageSwitcher(driver).open_store_main_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
         .try_to_register_person(person)
@@ -117,8 +109,7 @@ def test_registering_empty_telephone(driver):
 @allure.title("Attempt to register with an empty password")
 def test_registering_empty_password(driver):
     person = PersonGenerator.create_person_with_empty_password()
-    register_page = MainPage(driver) \
-        .open_page() \
+    register_page = PageSwitcher(driver).open_store_main_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
         .try_to_register_person(person)
@@ -130,8 +121,7 @@ def test_registering_empty_password(driver):
 @allure.title("Attempt to register with an empty confirm")
 def test_registering_empty_password_confirm(driver):
     person = PersonGenerator.create_person_with_empty_password_confirm()
-    register_page = MainPage(driver) \
-        .open_page() \
+    register_page = PageSwitcher(driver).open_store_main_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
         .try_to_register_person(person)
@@ -143,8 +133,7 @@ def test_registering_empty_password_confirm(driver):
 @allure.title("Attempt to register with different passwords")
 def test_registering_different_passwords(driver):
     person = PersonGenerator.create_person_with_different_passwords()
-    register_page = MainPage(driver) \
-        .open_page() \
+    register_page = PageSwitcher(driver).open_store_main_page() \
         .open_my_account_dropdown() \
         .open_register_page() \
         .try_to_register_person(person)

@@ -1,12 +1,12 @@
 import allure
 from selenium.webdriver.common.by import By
 
-from infrastructure.types import Locator
+from utils.types import Locator
 from page_objects.admin_panel.main_page import MainPage
 from page_objects.base_page_object import BasePageObject
 
 
-class LoginPageLocators():
+class LoginPageLocators:
     USERNAME = Locator(By.CSS_SELECTOR, "#input-username")
     PASSWORD = Locator(By.CSS_SELECTOR, "#input-password")
     FORGOTTEN_PASSWORD = Locator(By.CSS_SELECTOR, "span[class='help-block'] a")
@@ -18,10 +18,6 @@ class LoginPage(BasePageObject):
 
     def __init__(self, driver):
         super().__init__(driver)
-
-    def open_page(self):
-        self.driver.get(self.driver.base_url + "/admin")
-        return self
 
     @allure.step
     def check_for_visible_elements(self):

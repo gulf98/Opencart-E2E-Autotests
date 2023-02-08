@@ -2,7 +2,9 @@
 Technologies used: python, pytest, pytest-xdist, selenoid, mimesis, selenium, docker, allure.
 
 Before starting you need:
-- deploy opencart app
+- run opencart app
+  - install and run docker desktop
+  - in opencart_app run docker-compose: docker-compose up -d
 - install python 3.9+
 - create a virtual environment (example for macOS): python -m venv venv; source venv/bin/activate;
 - install dependencies: pip install -r requirements.txt
